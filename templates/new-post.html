@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+New Post
+{% endblock %}
+
+{% block content %}
+<div id="main">
+    <h1>New post</h1>
+    <form action="/post" method="POST" style="z-index: 0;">
+        <div style="display: flex; gap: 30px; flex-direction: column;">
+            <div>
+                <input name="title" style="height: 42px; width: 100%; font-size: 24px;">
+            </div>
+            <div>
+                {{ mdeditor.load() }}
+            </div>
+        </div>
+        <button type="submit">Create</button>
+    </form>
+    <br />
+</div>
+{% endblock %}

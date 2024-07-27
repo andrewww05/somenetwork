@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Posts
+{% endblock %}
+
+{% block content %}
+<div id="main">
+    <a name="TemplateInfo"></a>
+    <h1>Posts:</h1>
+    {% for post in posts %}
+    <a href="/post/{{ post.id }}">
+        <div class="post" style="cursor: pointer;">
+            <div style="display: flex; gap: 10px; margin: 0 20px;">
+                <span>
+                    <img src="{{ url_for('static', filename='images/pfp.png') }}" width="64" height="64"
+                         alt="user-avatar" class="float-left" style="border-radius: 100%; pointer-events: none;"/>
+                </span>
+                <span>
+                    <h1>{{ post.title }}</h1>
+                    <h3>Author: User</h3>
+                </span>
+            </div>
+            <p class="comments align-right" style="pointer-events: none;">
+                <a href="#">Comments(7)</a> : <span
+                    class="post-date">{{ post.createdAt }}</span>
+            </p>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dateElements = document.querySelectorAll('.post-date');
+
+        dateElements.forEach(function(dateElement) {
+            const dateStr = dateElement.textContent.trim();
+            const date = new Date(dateStr);
+
+            if (isNaN(date.getTime())) {
+                console.error("Invalid date format:", dateStr);
+                return;
+            }
+
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            const formattedDate = date.toLocaleDateString('en-US', options);
+
+            dateElement.textContent = formattedDate;
+        });
+    });
+</script>
+{% endblock %}
