@@ -7,7 +7,7 @@ New Post
 {% block content %}
 <div id="main">
     <h1>New post</h1>
-    <form action="/post" method="POST" style="z-index: 0;">
+    <form action="/posts/new" method="POST" style="z-index: 0;">
         <div style="display: flex; gap: 30px; flex-direction: column;">
             <div>
                 <input name="title" style="height: 42px; width: 100%; font-size: 24px;">
@@ -16,7 +16,7 @@ New Post
                 {{ mdeditor.load() }}
             </div>
         </div>
-        <button type="submit">Create</button>
+        <button class="btn btn-large btn-inverse" type="submit" style="width: 100%;">Create</button>
     </form>
     <br />
 </div>
