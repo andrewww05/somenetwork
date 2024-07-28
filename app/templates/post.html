@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ author_username }}'s post: {{ post.title }}
+{% endblock %}
+
+{% block content %}
+<div id="main" class="p-4">
+    <p>/ <a href="/">homepage</a> / <a href="/post/{{ post.id }}">post / {{ post.id }}</a> </p>
+    <div class="flex items-center gap-4 mb-4">
+        <img src="{{ url_for('static', filename='images/pfp.png') }}" width="64" height="64" alt="user-avatar"
+             class="rounded-full"/>
+        <div class="w-full">
+            <h1 style="margin-left: 0; margin-top: 10px" class="text-3xl">{{ post.title }}</h1>
+            <div style="margin-left: 18px;" class="flex justify-between items-center mt-2">
+                <h4>Author: {{ author_username }}</h4>
+                <h5 id="post-date">{{ post.createdAt }}</h5>
+            </div>
+        </div>
+    </div>
+    <p>{{ post.text|safe }}</p>
+
+    <br>
+    <br>
+
+    <div>
+      <h1>Add a Comment:</h1>
+        {% if user.is_authenticated %}
+          <form action="/post/{{ post.id }}/comment" method="post" style="display: flex; flex-direction: column; gap: 10px;">
+            <textarea id="comment" name="text" rows="4" style="width: 100%" required></textarea>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+              <button type="reset" class="btn btn-inverse">Reset</button>
+              <button type="submit" class="btn btn-primary">Comment</button>
+            </div>
+          </form>
+        {% else %}
+            <h2><a href="/login" style="color: red;">Join</a> to add comment!</h2>
+        {% endif %}
+    </div>
+
+    {% if comments %}
+        <h4 class="mt-8 mb-4 text-2xl">Comments ({{ comments|length }}):</h4>
+        {% for comment in comments %}
+            <div class="flex items-start mb-4">
+                <div class="flex items-center justify-center" style="height: 64px; width: 64px;">
+                    <img src="{{ url_for('static', filename='images/pfp.png') }}" width="48" height="48" alt="user-avatar" class="rounded-full"/>
+                </div>
+                <div>
+                    <h1 class="font-bold" style="font-size: 16px;" >{{ comment_authors[comment.id] }}</h1>
+                    <p class="comment-date">{{ post.createdAt }}</p>
+                    <p style="color: lightgray; font-size: 16px;" class="break-words">
+                        {{ comment.text }}
+                    </p>
+                </div>
+            </div>
+        {% else %}
+            <p>No comments yet.</p>
+        {% endfor %}
+    {% else %}
+        <p>No comments yet.</p>
+    {% endif %}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const dateElement = document.getElementById('post-date');
+      const dateStr = dateElement.textContent.trim();
+      const date = new Date(dateStr);
+      if (isNaN(date.getTime())) {
+        console.error("Invalid date format:", dateStr);
+        return;
+      }
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      const formattedDate = date.toLocaleDateString('en-US', options);
+      dateElement.textContent = formattedDate;
+      const dateElements = document.querySelectorAll('.comment-date');
+
+        dateElements.forEach(function(dateElement) {
+            const dateStr = dateElement.textContent.trim();
+            const date = new Date(dateStr);
+
+            if (isNaN(date.getTime())) {
+                console.error("Invalid date format:", dateStr);
+                return;
+            }
+
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            const formattedDate = date.toLocaleDateString('en-US', options);
+
+            dateElement.textContent = formattedDate;
+        });
+    });
+</script>
+{% endblock %}

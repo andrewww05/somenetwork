@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Registration
+{% endblock %}
+
+{% block content %}
+<div id="main"> <a name="TemplateInfo"></a>
+    <h1>Register profile:</h1>
+    <br>
+    <form method="POST" action="/register" style="max-width: 300px; margin: 0 auto;">
+        <div style="display: flex; gap: 30px; flex-direction: column;">
+            <div>
+                <input name="username" placeholder="Your username" style="height: 32px; width: 100%; font-size: 14px;">
+            </div>
+            <div>
+                <input type="password" name="password" placeholder="Your password" style="height: 32px; width: 100%; font-size: 14px;">
+            </div>
+            <button class="btn btn-inverse" type="submit" style="width: 100%;">Register</button>
+            <p>if you have an account, you can <a href="/login" style="color: darkred;">log in</a> to it!</p>
+        </div>
+    </form>
+</div>
+{% endblock %}

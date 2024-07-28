@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+<div id="main"> <a name="TemplateInfo"></a>
+    <h1>Login to profile:</h1>
+    <br>
+    <form method="POST" action="/login" style="max-width: 300px; margin: 0 auto;">
+        <div style="display: flex; gap: 30px; flex-direction: column;">
+            <div>
+                <input name="username" placeholder="Your username" style="height: 32px; width: 100%; font-size: 14px;">
+            </div>
+            <div>
+                <input type="password" name="password" placeholder="Your password" style="height: 32px; width: 100%; font-size: 14px;">
+            </div>
+            <button class="btn btn-inverse" type="submit" style="width: 100%;">Login to profile</button>
+            <p>If you don't have an account yet, <a href="/register" style="color: darkred;">register it!</a></p>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+<div id="header">
+    <div id="header-content">
+        <h1 id="logo">Some Network...</h1>
+        <h2 id="slogan">I haven't come up with a slogan yet...</h2>
+<!--        <div class="searchform">-->
+<!--            <form action="#">-->
+<!--                <p>-->
+<!--                    <input name="search_query" class="textbox" type="text"/>-->
+<!--                    <input name="search" class="button" value="Search" type="submit"/>-->
+<!--                </p>-->
+<!--            </form>-->
+<!--        </div>-->
+        <ul>
+            <li><a href="/" id="current">Home</a></li>
+            <li><a href="/about">About</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="/posts/new">New Post</a></li>
+              <li><a href="/chat">Chat</a></li>
+              <li><a href="/logout">Logout</a></li>
+            {% else %}
+              <li><a href="/login">Login</a></li>
+              <li><a href="/register">Register</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentUrl = window.location.pathname;
+            var links = document.querySelectorAll('#header ul li a');
+
+            links.forEach(function(link) {
+                link.removeAttribute('id');
+            });
+
+            links.forEach(function(link) {
+                if (link.getAttribute('href') === currentUrl) {
+                    link.setAttribute('id', 'current');
+                }
+            });
+        });
+    </script>
+
+</div>

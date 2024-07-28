@@ -100,8 +100,7 @@ blockquote {
 form {
 	margin: 15px;
 	padding: 0;
-	background: #000;  
-   border: 1px dashed #151515;
+	background: #000;
 }
 label {
 	display:block;
@@ -189,13 +188,13 @@ input.button {
 }
 #header-content #logo {
 	position: absolute;	
-	font: bold 50px Verdana, 'Trebuchet Ms', Sans-serif;
+	font: bold 32px Verdana, 'Trebuchet Ms', Sans-serif;
 	letter-spacing: -2px; 
 	color: #000;
 	margin: 0; padding: 0;
 	
 	/* change the values of left and top to adjust the position of the logo */
-	top: 5px; left: 20px;
+	top: 20px; left: 33px;
 }
 #header-content #slogan {
 	position: absolute;	
@@ -209,6 +208,10 @@ input.button {
 }
 
 /* header menu */
+#header-content {
+    width: 100%;
+}
+
 #header-content ul {
 	position: absolute;
 	right: 20px; top: 75px; 
