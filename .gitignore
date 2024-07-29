@@ -2,5 +2,4 @@ venv
 instance
 **/.idea
 **/__pycache__/
-**/.idea
 *.env

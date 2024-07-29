@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_mdeditor import MDEditor
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user
@@ -31,6 +31,13 @@ def create_app():
     @app.errorhandler(404)
     def page_not_found(e):
         return render_template('error-handlers/not-found.html', user=current_user), 404
+
+    @app.route('/health')
+    def health():
+        resp = jsonify(health="healthy")
+        resp.status_code = 200
+
+        return resp
 
     app.register_blueprint(auth_bp, url_prefix="/")
     app.register_blueprint(posts_bp, url_prefix="/")
